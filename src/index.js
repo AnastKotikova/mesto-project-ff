@@ -1,7 +1,7 @@
 import "./pages/index.css";
 import {initialCards} from "./scripts/cards";
 import {fillCard, deleteCard, likeCard} from "./components/card";
-import {openAndHandleModalElement, CloseModal} from "./components/modal";
+import {openAndHandleModalElement, closeModal} from "./components/modal";
 // Кнопки
 const editProfileButton = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
@@ -30,7 +30,7 @@ function handleFormSubmit(evt) {
 
   profileTitle.textContent = name;
   profileDescription.textContent = job;
-  CloseModal(evt.target.closest(".popup"));
+  closeModal(evt.target.closest(".popup"));
 }
 
 function handleAddFormSubmit(evt) {
@@ -41,15 +41,15 @@ function handleAddFormSubmit(evt) {
   newCardInfo.name = namePlaceInput.value;
   newCardInfo.link = linkImageInput.value;
   places.prepend(fillCard(newCardInfo, deleteCard, likeCard, openImg));
-  CloseModal(evt.target.closest(".popup"));
+  closeModal(evt.target.closest(".popup"));
   addFormElement.reset();
 }
 
-function openImg(evt) {
+function openImg(name,link) {
   let popupImg = document.querySelector(".popup_type_image");
-  popupImg.querySelector(".popup__image").setAttribute("src", evt.target.src);
-  popupImg.querySelector(".popup__image").setAttribute("alt", evt.target.alt);
-  popupImg.querySelector(".popup__caption").textContent = evt.target.alt;
+  popupImg.querySelector(".popup__image").setAttribute("src", link);
+  popupImg.querySelector(".popup__image").setAttribute("alt", name);
+  popupImg.querySelector(".popup__caption").textContent = name;
   openAndHandleModalElement(popupImg);
 }
 

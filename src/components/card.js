@@ -14,16 +14,19 @@ export function fillCard(cardInfo, deleteCardFunc, likeCardFunc, openImgFunc) {
 
   card_title.textContent = cardInfo.name;
 
-  deleteButton.addEventListener("click", deleteCardFunc);
+  deleteButton.addEventListener("click", ()=>{
+    deleteCardFunc(card_clone);
+  });
   likeButton.addEventListener("click", likeCardFunc);
-  card_img.addEventListener("click", openImgFunc);
+  card_img.addEventListener("click", ()=>{
+    openImgFunc(cardInfo.name, cardInfo.link);
+  });
 
   return card_clone;
 }
 // Функция удаления карточки
-export function deleteCard(evt) {
-  const deleteButtonTarget = evt.target;
-  deleteButtonTarget.closest(".card").remove();
+export function deleteCard(cardElement) {
+  cardElement.remove();
 }
 
 // Поставить лайк
